@@ -22,6 +22,8 @@ class Message(models.Model):
                     args[index] = (args[index][0], args[index][1], get_real_ids(args[index][2]))
                 elif isinstance(args[index][2], list):
                     args[index] = (args[index][0], args[index][1], [get_real_ids(x) for x in args[index][2]])
+        if (self.env.user.has_group('base.group_erp_manager')):
+            return super(Message, self.sudo()).search(args, offset=offset, limit=limit, order=order, count=count)
         return super(Message, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
     @api.model
