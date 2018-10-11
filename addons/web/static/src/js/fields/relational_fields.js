@@ -43,6 +43,7 @@ var M2ODialog = Dialog.extend({
             buttons: [{
                 text: _t('Create'),
                 classes: 'btn-primary',
+                disabled: true,
                 click: function () {
                     if (this.$("input").val() !== ''){
                         this.trigger_up('quick_create', { value: this.$('input').val() });
