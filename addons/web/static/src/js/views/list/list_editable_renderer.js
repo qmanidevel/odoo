@@ -481,6 +481,8 @@ ListRenderer.include({
                 items: '> tr.o_data_row',
                 helper: 'clone',
                 handle: '.o_row_handle',
+                placeholder: 'o_data_row ui-sortable-placeholder',
+                forcePlaceholderSize: true,
                 stop: this._resequence.bind(this),
             });
         }
