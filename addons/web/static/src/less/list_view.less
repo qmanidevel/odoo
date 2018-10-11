@@ -40,6 +40,16 @@
         border-bottom: 1px solid #cacaca;
     }
 
+    .o_data_row {
+        &.ui-sortable-placeholder {
+            background: #d1d1d1;
+        }
+
+        &.ui-sortable-helper {
+            opacity: 0.75;
+        }
+    }
+
     .o_column_sortable {
         position: relative;
         .user-select(none);  // Prevent unwanted selection while sorting
