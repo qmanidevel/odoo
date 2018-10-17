@@ -898,17 +898,19 @@ var ChatManager =  Class.extend(Mixins.EventDispatcherMixin, ServicesMixin, {
                 args: [[]]
             });
     },
-    mark_as_read: function (message_ids) {
+    mark_as_read: function (message_ids, manual_read_msg) {
         var ids = _.filter(message_ids, function (id) {
             var message = _.findWhere(messages, {id: id});
             // If too many messages, not all are fetched, and some might not be found
             return !message || message.is_needaction;
         });
         if (ids.length) {
+            manual_read_msg = typeof(manual_read_msg) == 'undefined' ? false : manual_read_msg
             return this._rpc({
                     model: 'mail.message',
                     method: 'set_message_done',
                     args: [ids],
+                    kwargs: {context: {'manual_read_msg': manual_read_msg}},
                 });
         } else {
             return $.when();
