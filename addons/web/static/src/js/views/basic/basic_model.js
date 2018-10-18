@@ -1963,9 +1963,7 @@ var BasicModel = AbstractModel.extend({
         var records = [];
         var ids = [];
         list = this._applyX2ManyOperations(list);
-        if (_.isEmpty(list.data)) {
-            return $.when();
-        }
+
         _.each(list.data, function (localId) {
             var record = self.localData[localId];
             var data = record._changes || record.data;
@@ -1976,6 +1974,10 @@ var BasicModel = AbstractModel.extend({
             ids.push(many2oneRecord.res_id);
             model = many2oneRecord.model;
         });
+        if (!ids.length) {
+            console.log('not !ids.length')
+            return $.when();
+        }
         return this._rpc({
                 model: model,
                 method: 'name_get',
